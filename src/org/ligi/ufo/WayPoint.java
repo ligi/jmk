@@ -34,7 +34,17 @@ public class WayPoint {
 	private int lat;                 
 	
 	/** the longitude in deg*10^-7 **/
-	private int lon; 
+	private int lon; 	
+	
+	private int index;				// to indentify different waypoints, workaround for bad communications PC <-> NC 
+	private int heading;			// orientation, 0 no action, 1...360 fix heading, neg. = Index to POI in WP List
+	private int event_flag;			// future implementation       
+	private int type;				// typeof Waypoint    
+	private int event_channel_value;
+	private int altitude_rate;		// rate to change the setpoint 
+	private int speed;				// rate to change the Position 
+	private int cam_angle;			// Camera nick servo angle 
+	private String name;       		// 4 chars
 	
 	public WayPoint(int lat,int lon) {
 		this.setLat(lat);
@@ -79,5 +89,77 @@ public class WayPoint {
 
 	public int getLon() {
 		return lon;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public int getHeading() {
+		return heading;
+	}
+
+	public void setHeading(int heading) {
+		this.heading = heading;
+	}
+
+	public int getEventFlag() {
+		return event_flag;
+	}
+
+	public void setEventFlag(int event_flag) {
+		this.event_flag = event_flag;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public int getEventChannelValue() {
+		return event_channel_value;
+	}
+
+	public void setEventChannelValue(int event_channel_value) {
+		this.event_channel_value = event_channel_value;
+	}
+
+	public int getAltitudeRate() {
+		return altitude_rate;
+	}
+
+	public void setAltitudeRate(int altitude_rate) {
+		this.altitude_rate = altitude_rate;
+	}
+
+	public int getCamAngle() {
+		return cam_angle;
+	}
+
+	public void setCamAngle(int cam_angle) {
+		this.cam_angle = cam_angle;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
