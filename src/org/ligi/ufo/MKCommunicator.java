@@ -26,6 +26,8 @@ import org.ligi.ufo.simulation.SimulatedMKCommunicationAdapter;
 import org.ligi.ufo.logging.LoggingInterface;
 import org.ligi.ufo.logging.NotLogger;
 
+import android.util.Log;
+
 /**
  *                                          
  * Main Class to Communicate with MikroKopter Hardware
@@ -73,7 +75,7 @@ public class MKCommunicator
 
     public    int[] debug_buff_targets=null;
 
-    private LoggingInterface Log=new NotLogger();
+   // private LoggingInterface Log=new NotLogger();
 
     private boolean sending=false;
     private boolean recieving=false;
@@ -125,6 +127,10 @@ public class MKCommunicator
     public final static byte FAKE_SLAVE_ADDR            = 42;
 
     public String name;
+    
+    
+    private MKWayPointPool myWayPointPool;
+    
 
     public void addNotificationListener(DUBwiseNotificationListenerInterface i) {
     	notify_listeners.addElement(i);
@@ -266,6 +272,9 @@ public class MKCommunicator
 		gps_position=new MKGPSPosition();
 		stats = new MKStatistics();
 		proxy =new MKProxy(this);
+		
+		myWayPointPool=new MKWayPointPool();
+		
 		new Thread( this ).start(); // fire up main Thread 
     }
 
@@ -483,7 +492,12 @@ public class MKCommunicator
     	wait4send();
 		send_command(0,'a',id);
     }
-
+    
+    public void requestWayPoint(int index) {
+    	wait4send();
+    	Log.i("","request to get WayPoint");
+		send_command(NAVI_SLAVE_ADDR,'x',index);
+    }
  
     public void trigger_LCD_by_page(int page) {
     	wait4send();
@@ -853,6 +867,54 @@ public class MKCommunicator
 		    	stats.process_alt(getAlt());
 		    	break;
 	
+		    case 'X': // Waypoint ( requested by 'x' )
+		    	
+		    	int offset=2;
+		    	
+		    	
+		    	int count=(byte)decoded_data[0];
+		    	int pos=(byte)decoded_data[1];
+		    	
+		    	myWayPointPool.setCount(count);
+		    	
+		    	Log.i("","Got WayPoint count:" + count + " pos:" + pos);
+		    	
+		    	
+		    	WayPoint rcv_wp=new WayPoint(MKHelper.parse_arr_4(offset+4, decoded_data),MKHelper.parse_arr_4(offset, decoded_data));
+		    	
+		    	
+		    	rcv_wp.setAltitude(MKHelper.parse_arr_4(offset+8, decoded_data));
+		    	
+		    	rcv_wp.setStatus((byte)decoded_data[offset+12]);
+		    	
+		    	rcv_wp.setHeading(MKHelper.parse_arr_2(offset+13, decoded_data));
+		    	
+				rcv_wp.setToleranceRadius((byte)decoded_data[offset+15]);
+				
+				rcv_wp.setHoldTime((byte)decoded_data[offset+16]);
+				
+				rcv_wp.setEventFlag((byte)decoded_data[offset+17]);
+
+				rcv_wp.setIndex((byte)decoded_data[offset+18]);
+				
+				rcv_wp.setType((byte)decoded_data[offset+19]);
+				
+				rcv_wp.setChannelEvent((byte)decoded_data[offset+20]);
+				
+				rcv_wp.setAltitudeRate((byte)decoded_data[offset+21]);
+				
+				rcv_wp.setSpeed((byte)decoded_data[offset+22]);
+				
+				rcv_wp.setCamAngle((byte)decoded_data[offset+23]);
+				
+				rcv_wp.setName(MKHelper.parse_string(offset+24, 4, decoded_data));
+                
+				Log.i("","Got WayPoint" + rcv_wp.getIndex());
+		    	
+				myWayPointPool.setWayPoint(pos, rcv_wp);
+				
+		    	break;
+		    	
 		    default:
 		    	stats.other_data_count++;
 		    	break;
@@ -1026,11 +1088,11 @@ public class MKCommunicator
     }
 
     public void log(String str) {
-    	Log.i(""+str);
+    	//Log.i(""+str);
     }
     
     public void setLoggingInterface(LoggingInterface new_loger) {
-    	Log=new_loger;
+    	//Log=new_loger;
     }
 
     /**
@@ -1053,5 +1115,9 @@ public class MKCommunicator
     
     public void stop() {
     	 thread_running=false;
+    }
+    
+    public MKWayPointPool getWayPointPool() {
+    	return myWayPointPool;
     }
 }

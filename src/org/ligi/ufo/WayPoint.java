@@ -37,6 +37,8 @@ public class WayPoint {
 	private int lon; 	
 	
 	private int index;				// to indentify different waypoints, workaround for bad communications PC <-> NC 
+	private int altitude;		
+	private int status;
 	private int heading;			// orientation, 0 no action, 1...360 fix heading, neg. = Index to POI in WP List
 	private int event_flag;			// future implementation       
 	private int type;				// typeof Waypoint    
@@ -161,5 +163,21 @@ public class WayPoint {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getAltitude() {
+		return altitude;
+	}
+
+	public void setAltitude(int altitude) {
+		this.altitude = altitude;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

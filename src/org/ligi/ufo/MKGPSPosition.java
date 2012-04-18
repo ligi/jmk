@@ -423,4 +423,5 @@ public class MKGPSPosition
     	}
 			
     	} // end of set_by_mk_data
+    
 }

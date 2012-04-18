@@ -57,6 +57,14 @@ public final class MKHelper
 	   arr[offset+3]=(byte)((0xFF)&(val>>24));	   
    }
    
+   
+   public final static String parse_string(int offset,int len,int[] in_arr) {
+	   String res="";
+	   for (int i=0;i<len;i++)
+		   res+=(char)in_arr[offset+i];
+	   return res;
+   }
+   
    /**
     * test if a bit is set in a integer
     * 
