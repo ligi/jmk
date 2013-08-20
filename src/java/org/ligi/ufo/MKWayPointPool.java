@@ -30,8 +30,8 @@ public class MKWayPointPool {
     }
 
     public void clearWayPoints() {
-        for ( int i=0;i<waypoints.length;i++) {
-            waypoints[i]=null;
+        for (int i = 0; i < waypoints.length; i++) {
+            waypoints[i] = null;
         }
     }
 

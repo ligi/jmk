@@ -648,8 +648,8 @@ public class MKCommunicator
      * @param cmd
      * @param params
      * @deprecated - use send_command(int modul,char cmd,byte[] params)  instead
-     *             send command to FC
-     *             add crc and pack into pseudo Base64
+     * send command to FC
+     * add crc and pack into pseudo Base64
      */
     public void send_command(int modul, char cmd, int[] params) {
         //	if (modul==0) return;
@@ -908,7 +908,7 @@ public class MKCommunicator
     public void close_connections(boolean force) {
 
         //# karakara
-    	/*if (true)
+        /*if (true)
     		return;
     	*/
 

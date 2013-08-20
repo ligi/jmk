@@ -19,10 +19,7 @@ package org.ligi.ufo;
 
 
 public class MKParamsParser extends ParamsClass
-        implements MKParamsGeneratedDefinitions
-//,org.ligi.ufo.DUBwiseLangDefs
-
-{
+        implements MKParamsGeneratedDefinitions {
 
     public final static byte INCOMPATIBLE_FLAG_NOT = 0;
     public final static byte INCOMPATIBLE_FLAG_FC_TOO_OLD = 1;
@@ -112,7 +109,7 @@ public class MKParamsParser extends ParamsClass
         stick_stringids = new int[MKStickData.MAX_STICKS];
 
 	/* STRINGRM
-	for (int i=0;i<MKStickData.MAX_STICKS;i++)
+    for (int i=0;i<MKStickData.MAX_STICKS;i++)
 	    stick_stringids[i]=STRINGID_NOTREADYET;
 	*/
         poti_pos = new int[8];
@@ -171,11 +168,13 @@ public class MKParamsParser extends ParamsClass
         int definition_pos = params_version - 73;
 
         if ((definition_pos < 0) || ((definition_pos >= all_tab_stringids.length))) {
-            if ((definition_pos < 0))
+            if ((definition_pos < 0)) {
                 incompatible_flag = INCOMPATIBLE_FLAG_FC_TOO_OLD;
+            }
 
-            if ((definition_pos >= all_tab_stringids.length))
+            if ((definition_pos >= all_tab_stringids.length)) {
                 incompatible_flag = INCOMPATIBLE_FLAG_FC_TOO_NEW;
+            }
 
             return;
         }
@@ -183,7 +182,9 @@ public class MKParamsParser extends ParamsClass
 
         last_parsed_paramset = in_arr[0] - 1;
 
-        if (active_paramset == -1) active_paramset = last_parsed_paramset;
+        if (active_paramset == -1) {
+            active_paramset = last_parsed_paramset;
+        }
 
         tab_stringids = all_tab_stringids[definition_pos];
         field_stringids = all_field_stringids[definition_pos];
@@ -198,17 +199,14 @@ public class MKParamsParser extends ParamsClass
 
         //	names[last_parsed_paramset]="";
         for (int i = 0; i < length + 2; i++) {
-            if (i < length)
+            if (i < length) {
                 field[last_parsed_paramset][i] = in_arr[i + 2];
+            }
             field_bak[last_parsed_paramset][i] = in_arr[i];
         }
 
-/*
-	for (int i=0;i<MKStickData.MAX_STICKS;i++)
-	    stick_stringids[i]=PARAMID_NONE_ASSIGNED;
-*/
-        for (int tab = 0; tab < tab_stringids.length; tab++)
-            for (int item = 0; item < field_types[tab].length; item++)
+        for (int tab = 0; tab < tab_stringids.length; tab++) {
+            for (int item = 0; item < field_types[tab].length; item++) {
                 if (field_types[tab][item] == PARAMTYPE_STICK) {
                     if (field[last_parsed_paramset][field_positions[tab][item]] < 12)
                         stick_stringids[field[last_parsed_paramset][field_positions[tab][item]]] = field_stringids[tab][item];
@@ -245,7 +243,8 @@ public class MKParamsParser extends ParamsClass
 
                     }
                 }
-
+            }
+        }
 
     }
 

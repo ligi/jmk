@@ -30,7 +30,7 @@ public final class MKHelper {
 
         if ((res & (1 << 15)) != 0) {
             int lower15 = (1 << 16) - 1;
-            res&= lower15;
+            res &= lower15;
             return -((res) ^ lower15);
         }
 
@@ -49,7 +49,7 @@ public final class MKHelper {
     }
 
     public final static int parse_signed_arr_2(int offset, int[] in_arr) {
-        return parse_signed_int_2(in_arr[offset + 0],in_arr[offset + 1]);
+        return parse_signed_int_2(in_arr[offset + 0], in_arr[offset + 1]);
     }
 
 
@@ -75,7 +75,7 @@ public final class MKHelper {
     public final static void int16ToByteArr(int val, byte[] arr, int offset) {
         if (val < 0) {
             val = val * -1;
-            val = val ^ ((1<<16) - 1);
+            val = val ^ ((1 << 16) - 1);
             val = val | (1 << 15);
         }
         arr[offset] = ((byte) (val));
@@ -229,9 +229,9 @@ public final class MKHelper {
     }
 
     public static int[] byte2intarr(byte[] in) {
-        int[] out=new int[in.length];
-        for (int i=0;i<in.length;i++) {
-            out[i]=in[i];
+        int[] out = new int[in.length];
+        for (int i = 0; i < in.length; i++) {
+            out[i] = in[i];
         }
         return out;
     }

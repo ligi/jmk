@@ -205,7 +205,7 @@ public class MKFirmwareFlasher
 
                     if (avr_sig == 63)
                         init_sequence = false;
-			    /*    while (avr_sig==63)
+                /*    while (avr_sig==63)
 			        avr_sig=comm_adapter.read();
 			    */
                     flash_msgs[msg_pos++] = "got avr sig " + avr_sig;

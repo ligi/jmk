@@ -38,15 +38,15 @@ public class MKPosition extends Object {
 
 
     @Override
-    public boolean equals(Object other)  {
+    public boolean equals(Object other) {
         if (!(other instanceof MKPosition))
             return false;
-        MKPosition other_pos=(MKPosition)other;
+        MKPosition other_pos = (MKPosition) other;
 
-        if (other_pos.getLat()!=getLat())
+        if (other_pos.getLat() != getLat())
             return false;
 
-        if (other_pos.getLon()!=getLon())
+        if (other_pos.getLon() != getLon())
             return false;
 
         return true;

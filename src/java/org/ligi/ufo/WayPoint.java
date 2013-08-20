@@ -62,7 +62,7 @@ public class WayPoint extends MKPosition {
 
         this(MKHelper.parse_arr_4(offset + 4, data), MKHelper.parse_arr_4(offset, data));
 
-        setAltitude(MKHelper.parse_arr_4(offset + 8, data)/10);
+        setAltitude(MKHelper.parse_arr_4(offset + 8, data) / 10);
 
         setStatus((byte) data[offset + 12]);
 
@@ -105,8 +105,6 @@ public class WayPoint extends MKPosition {
     public int getToleranceRadius() {
         return tolerance_radius;
     }
-
-
 
 
     public int getIndex() {
@@ -263,27 +261,27 @@ public class WayPoint extends MKPosition {
         if (!(o instanceof WayPoint))
             return false;
 
-        WayPoint other_wp=(WayPoint)o;
-        if (other_wp.index!=index)
+        WayPoint other_wp = (WayPoint) o;
+        if (other_wp.index != index)
             return false;
 
-        if (other_wp. cam_angle!=cam_angle)
+        if (other_wp.cam_angle != cam_angle)
             return false;
 
 
-        if (other_wp.heading!=heading)
+        if (other_wp.heading != heading)
             return false;
 
-        if (other_wp.speed!=speed)
+        if (other_wp.speed != speed)
             return false;
 
-        if (other_wp.altitude!=altitude)
+        if (other_wp.altitude != altitude)
             return false;
 
-        if (other_wp.cam_angle!=cam_angle)
+        if (other_wp.cam_angle != cam_angle)
             return false;
 
-        if (other_wp.getEventChannelValue()!=getEventChannelValue())
+        if (other_wp.getEventChannelValue() != getEventChannelValue())
             return false;
 
         // TODO complete the tests here

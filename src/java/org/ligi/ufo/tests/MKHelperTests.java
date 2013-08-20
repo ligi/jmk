@@ -14,7 +14,7 @@ public class MKHelperTests {
     public static String isConvertionSane() {
         int[] tmp_arr = new int[4];
         /*
-		MKHelper.int16ToByteArr(0, tmp_arr, 0);
+        MKHelper.int16ToByteArr(0, tmp_arr, 0);
 			
 		if (0!=MKHelper.parse_signed_arr_2(0, getByteArr(tmp_arr)))
 			return "0->"+MKHelper.parse_signed_arr_2(0, getByteArr(tmp_arr));
