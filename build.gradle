@@ -29,7 +29,7 @@ javarob {
 
 test {
     scanForTestClasses = false
-    include "**/*Test.class"
+    include "**/The*.class"
 }
 
 repositories {

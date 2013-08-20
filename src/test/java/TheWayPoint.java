@@ -6,10 +6,10 @@ import org.ligi.ufo.WayPoint;
 import static org.fest.assertions.Fail.fail;
 import static org.junit.Assert.assertTrue;
 
-public class WayPointProtocolRoundTripTest {
+public class TheWayPoint {
 
     @Test
-    public void WayPointWIthNegativeHeadingShouldBeTheSameAfterRoundTrip() {
+    public void withNegativeHeadingShouldBeTheSameAfterRoundTrip() {
         WayPoint pnt= TestSeeds.WAYPOINT3();
         pnt.setHeading(-100);
         WayPoint trippedPnt=new WayPoint(MKHelper.byte2intarr(pnt.toByteArray()),0);
@@ -17,7 +17,7 @@ public class WayPointProtocolRoundTripTest {
     }
 
     @Test
-    public void WayPointWIthPositiveHeadingShouldBeTheSameAfterRoundTrip() {
+    public void withPositiveHeadingShouldBeTheSameAfterRoundTrip() {
         WayPoint pnt= TestSeeds.WAYPOINT3();
         pnt.setHeading(-0);
         WayPoint trippedPnt=new WayPoint(MKHelper.byte2intarr(pnt.toByteArray()),0);
@@ -25,7 +25,7 @@ public class WayPointProtocolRoundTripTest {
     }
 
     @Test
-    public void WayPointWIthZeroHeadingShouldBeTheSameAfterRoundTrip() {
+    public void withZeroHeadingShouldBeTheSameAfterRoundTrip() {
         WayPoint pnt= TestSeeds.WAYPOINT3();
         pnt.setHeading(0);
         WayPoint trippedPnt=new WayPoint(MKHelper.byte2intarr(pnt.toByteArray()),0);
