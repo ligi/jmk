@@ -1,9 +1,4 @@
 /**************************************************
- *
- * class representing the MikroKopter Params Structure     
- *
- * Author:        Marcus -LiGi- Bueschleb      
- *
  * License:
  *  http://creativecommons.org/licenses/by-nc-sa/2.0/de/ 
  *  (Creative Commons / Non Commercial / Share Alike)
@@ -17,7 +12,9 @@
 
 package org.ligi.ufo;
 
-
+/**
+ * class representing the MikroKopter Params Structure
+ */
 public class MKParamsParser extends ParamsClass
         implements MKParamsGeneratedDefinitions {
 
@@ -84,13 +81,14 @@ public class MKParamsParser extends ParamsClass
 
     */
 
-    public void set_name(String nme) {
-        if (nme.length() > 10)
-            nme = nme.substring(0, 10);
+    public void set_name(String name) {
+        if (name.length() > 10) { // shorten when needed
+            name = name.substring(0, 10);
+        }
         //	names[act_paramset]=nme;
         int nme_pos = 0;
-        while (nme_pos < nme.length()) {
-            field[act_paramset][name_start + nme_pos] = (byte) nme.charAt(nme_pos);
+        while (nme_pos < name.length()) {
+            field[act_paramset][name_start + nme_pos] = (byte) name.charAt(nme_pos);
             nme_pos++;
         }
         field[act_paramset][name_start + nme_pos] = 0;
@@ -103,7 +101,6 @@ public class MKParamsParser extends ParamsClass
         for (int ii = 0; ii < MAX_PARAMSETS; ii++) {
             field[ii] = null;
             field_bak[ii] = null;
-
         }
 
         stick_stringids = new int[MKStickData.MAX_STICKS];
