@@ -21,7 +21,8 @@ public class MKParamsParser extends ParamsClass
     public enum Compatibility {
         COMPATIBLE,
         TOO_OLD,
-        TOO_NEW
+        TOO_NEW,
+        INCOMPATIBLE
     }
 
     // be positive that the params are not incompatible
@@ -184,6 +185,10 @@ public class MKParamsParser extends ParamsClass
             return;
         }
 
+        if (all_lengths[definition_pos]==0) {
+            compatibility=Compatibility.INCOMPATIBLE;
+            return;
+        }
 
         last_parsed_paramset = in_arr[0] - 1;
 

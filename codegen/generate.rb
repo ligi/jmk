@@ -50,12 +50,8 @@ act_pos=0
 name_pos=0
 end_pos=0
 
-
-
 @categorys=[]
 @category={}
-
-
 
 def to_cat(name,items)
   @categorys << name
@@ -64,8 +60,8 @@ def to_cat(name,items)
 end
 
 
- new.each_line { |l|
- found=false
+new.each_line { |l|
+found=false
   function_hash.each_pair { |k,v|
     if l.scan(" "+k)!=[]
       found=true
@@ -128,7 +124,7 @@ all_lengths << end_pos
 } 
 
 interface_name="MKParamsGeneratedDefinitions"
-interface_path="../../../android/shared_src/org/ligi/ufo/"
+interface_path="../src/java/org/ligi/ufo/"
 interface_fname=interface_path+interface_name+".java"
 
 
@@ -176,25 +172,22 @@ interface_file << "}"+ "\n"
 puts "written " + interface_fname
 
 
-interface_name="MKParamsGeneratedDefinitionsToStrings"
-interface_path="../../../android/shared_src/org/ligi/ufo/"
-interface_fname=interface_path+interface_name+".java"
+#interface_name="MKParamsGeneratedDefinitionsToStrings"
+#interface_path="../../../android/shared_src/org/ligi/ufo/"
+#interface_fname=interface_path+interface_name+".java"
 
+#interface_file=rio(interface_fname)
 
-interface_file=rio(interface_fname)
+#interface_file < "package org.ligi.ufo;\n"
+#
+#interface_file << "public interface " + interface_name + " extends DUBwiseLangDefs\n"
 
-interface_file < "package org.ligi.ufo;\n"
+#interface_file << "{"+ "\n"
 
-interface_file << "public interface " + interface_name + " extends DUBwiseLangDefs\n"
+#interface_file <<  "public final static int[] TABID2STRINGID = { STRINGID_" + all_categorys.join(",STRINGID_") + "};\n"
+#interface_file <<  "public final static int[] PARAMID2STRINGID = { STRINGID_" + all_paramsids.join(",STRINGID_") + "};\n"
 
-interface_file << "{"+ "\n"
+#interface_file << "}"+ "\n"
 
-
-
-interface_file <<  "public final static int[] TABID2STRINGID = { STRINGID_" + all_categorys.join(",STRINGID_") + "};\n"
-interface_file <<  "public final static int[] PARAMID2STRINGID = { STRINGID_" + all_paramsids.join(",STRINGID_") + "};\n"
-
-interface_file << "}"+ "\n"
-
-puts "written " + interface_fname
+#puts "written " + interface_fname
 
