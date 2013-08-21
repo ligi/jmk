@@ -30,14 +30,13 @@
 package org.ligi.ufo;
 
 
-public class MKGPSPosition
-        implements DUBwiseDefinitions {
+public class MKGPSPosition {
 
     public final static int STATUS_INVALID = 0;
     public final static int STATUS_NEWDATA = 1;
 
-    public byte act_gps_format = GPS_FORMAT_DECIMAL;
-    public byte act_speed_format = SPEED_FORMAT_KMH;
+    public byte act_gps_format = DUBwiseDefinitions.GPS_FORMAT_DECIMAL;
+    public byte act_speed_format = DUBwiseDefinitions.SPEED_FORMAT_KMH;
 
     public final static int MAX_WAYPOINTS = 100;
 
@@ -229,10 +228,10 @@ public class MKGPSPosition
 
     public String gps_format_str(int val, int format) {
         switch (format) {
-            case GPS_FORMAT_DECIMAL:
+            case  DUBwiseDefinitions.GPS_FORMAT_DECIMAL:
                 return "" + val / 10000000 + "." + val % 10000000;
 
-            case GPS_FORMAT_MINSEC:
+            case  DUBwiseDefinitions.GPS_FORMAT_MINSEC:
                 return "" + val / 10000000 + "^" + ((val % 10000000) * 60) / 10000000 + "'" + ((((val % 10000000) * 60) % 10000000) * 60) / 10000000 + "." + ((((val % 10000000) * 60) % 10000000) * 60) % 10000000;
 
             default:
@@ -247,13 +246,13 @@ public class MKGPSPosition
 
     public String act_speed_format_str(int val) {
         switch (act_speed_format) {
-            case SPEED_FORMAT_KMH:
+            case DUBwiseDefinitions.SPEED_FORMAT_KMH:
                 return "" + ((((val * 60) / 100) * 60) / 1000) + " km/h";
 
-            case SPEED_FORMAT_MPH:
+            case DUBwiseDefinitions.SPEED_FORMAT_MPH:
                 return "" + (((((val * 60) / 100) * 60) / 1000) * 10) / 16 + " m/h";
 
-            case SPEED_FORMAT_CMS:
+            case DUBwiseDefinitions.SPEED_FORMAT_CMS:
                 return "" + val + " cm/s";
 
             default:
