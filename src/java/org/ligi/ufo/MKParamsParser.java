@@ -18,20 +18,20 @@ package org.ligi.ufo;
 public class MKParamsParser extends ParamsClass
         implements MKParamsGeneratedDefinitions {
 
-    public final static byte INCOMPATIBLE_FLAG_NOT = 0;
-    public final static byte INCOMPATIBLE_FLAG_FC_TOO_OLD = 1;
-    public final static byte INCOMPATIBLE_FLAG_FC_TOO_NEW = 2;
+    public enum Compatibility {
+        COMPATIBLE,
+        TOO_OLD,
+        TOO_NEW
+    }
 
     // be positive that the params are not incompatible
-    public byte incompatible_flag = INCOMPATIBLE_FLAG_NOT;
+    public Compatibility compatibility = Compatibility.COMPATIBLE;
 
     public int[] poti_pos;
     public final static int MAX_PARAMSETS = 5;
-    //    public final static int MAX_PARAMLENGTH=100;
 
     public int[][] field;
     public int[][] field_bak;
-    //    public String[] names={"","","","",""};
 
     public final static int[][] default_params = {
             {1, 79, 1, 2, 3, 4, 5, 6, 7, 8, 104, 30, 30, 251, 10, 20, 30, 5, 64, 14, 16, 12, 8, 230, 27, 128, 80, 150, 5, 33, 35, 30, 0, 32, 0, 0, 0, 0, 100, 40, 0, 250, 100, 40, 0, 250, 3, 50, 90, 50, 90, 80, 1, 78, 78, 16, 0, 100, 0, 0, 0, 0, 95, 15, 243, 15, 170, 170, 252, 100, 90, 90, 90, 75, 75, 75, 0, 6, 8, 90, 30, 100, 100, 4, 0, 0, 0, 0, 0, 0, 0, 83, 112, 111, 114, 116, 0, 0, 78, 111, 114, 109, 97},
@@ -62,8 +62,12 @@ public class MKParamsParser extends ParamsClass
      */
     public void set_field_from_act(int pos, int val) {
         // clip values
-        if (val > 255) val = 255;
-        if (val < 0) val = 0;
+        if (val > 255) {
+            val = 255;
+        }
+        if (val < 0) {
+            val = 0;
+        }
         field[act_paramset][pos] = val;
     }
 
@@ -81,7 +85,7 @@ public class MKParamsParser extends ParamsClass
 
     */
 
-    public void set_name(String name) {
+    public void setName(String name) {
         if (name.length() > 10) { // shorten when needed
             name = name.substring(0, 10);
         }
@@ -153,7 +157,9 @@ public class MKParamsParser extends ParamsClass
     public String getParamName(int paramset) {
         String res = "";
         for (int i = name_start; i < length; i++) {
-            if (field[paramset][i] == 0) break;
+            if (field[paramset][i] == 0) {
+                break;
+            }
             res += (char) field[paramset][i];
         }
         return res;
@@ -161,16 +167,18 @@ public class MKParamsParser extends ParamsClass
 
 
     public void set_by_mk_data(int[] in_arr) {
+        compatibility =Compatibility.COMPATIBLE; // be positive ;-)
+
         params_version = in_arr[1];
         int definition_pos = params_version - 73;
 
         if ((definition_pos < 0) || ((definition_pos >= all_tab_stringids.length))) {
             if ((definition_pos < 0)) {
-                incompatible_flag = INCOMPATIBLE_FLAG_FC_TOO_OLD;
+                compatibility = Compatibility.TOO_OLD;
             }
 
             if ((definition_pos >= all_tab_stringids.length)) {
-                incompatible_flag = INCOMPATIBLE_FLAG_FC_TOO_NEW;
+                compatibility = Compatibility.TOO_NEW;
             }
 
             return;
@@ -246,11 +254,11 @@ public class MKParamsParser extends ParamsClass
     }
 
     public boolean allParamsetsKnown() {
-        boolean _tmp_fin = true;
+        boolean areAllParamsetsKnown = true; // be positive
         for (int i = 0; i < MAX_PARAMSETS; i++) {
-            _tmp_fin &= (field_bak[i] != null);
+            areAllParamsetsKnown &= (field_bak[i] != null); // face reality
         }
-        return _tmp_fin;
+        return areAllParamsetsKnown;
     }
 
 
