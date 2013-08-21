@@ -1,10 +1,4 @@
 /*********************************************************************
- *
- * class representing the MK-Version 
- * Author:        Marcus -LiGi- Bueschleb
- * Project-Start: 9/2007                                                                                                          *
- *
- *
  * License:
  *  http://creativecommons.org/licenses/by-nc-sa/2.0/de/ 
  *  (Creative Commons / Non Commercial / Share Alike)
@@ -18,9 +12,11 @@
 
 package org.ligi.ufo;
 
-public class MKVersion
+/**
+ * class representing the MK-Version
+ */
+public class MKVersion {
 
-{
     public int major = -1;
     public int minor = -1;
     public int proto_major = -1;
@@ -36,7 +32,6 @@ public class MKVersion
     public final static byte VERSION_AFTER = 0;
     public final static byte VERSION_EQUAL = 1;
     public final static byte VERSION_PREVIOUS = 2;
-
 
     public void reset() {
         major = -1;
@@ -65,11 +60,11 @@ public class MKVersion
     }
 
     public byte compare(int major_c, int minor_c) {
-        if ((major_c == major) && (minor_c == minor))
+        if ((major_c == major) && (minor_c == minor)) {
             return VERSION_EQUAL;
-
-        else if ((major_c * 1000 + minor_c) > (minor + major * 1000))
+        } else if ((major_c * 1000 + minor_c) > (minor + major * 1000)) {
             return VERSION_AFTER;
+        }
 
         return VERSION_PREVIOUS;
     }
@@ -77,7 +72,6 @@ public class MKVersion
     public boolean isEqualOrNewerThan(int major_c, int minor_c) {
         return compare(major_c, minor_c) != VERSION_PREVIOUS;
     }
-
 
     public int getSlaveAddr() {
         return slave_addr;
