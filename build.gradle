@@ -11,6 +11,11 @@ buildscript {
     classpath group: 'com.stanfy.android', name: 'gradle-plugin-java-robolectric', version: '2.0'
   }
 }
+
+configurations {
+    provided
+}
+
 sourceSets {
     main {
         java {
@@ -44,7 +49,16 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '1.8.0'
     testCompile group: 'org.easytesting', name: 'fest-assert', version: '1.4'
 
-    compile group: 'com.google.android', name: 'android', version: '4.1.1.4'
+    provided group: 'com.google.android', name: 'android', version: '4.1.1.4'
     testCompile group: 'org.robolectric', name: 'robolectric', version: '2.0-alpha-2'
 }
 
+
+
+sourceSets.main.compileClasspath += configurations.provided
+
+idea {
+    module {
+        scopes .PROVIDED.plus += configurations.provided
+    }
+}
